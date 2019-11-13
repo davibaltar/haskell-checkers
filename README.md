@@ -1,8 +1,21 @@
 ## Haskell Checkers
 
 Version of the game Checkers completely made in Haskell. The game deals with basic moves, invalid moves and if one of the players won. The game explores Haskell concepts such as List comprehension, Pattern matching and Guards. Have fun :)
- 
- ```js
+
+## How to play?
+
+```bash
+$ ghci checkers.hs
+```
+and 
+
+```bash
+*Main> main
+```
+
+## Game interface
+
+```js
         *** Checkers ***                    Player 1 (●)  |  Player 2 (○)
                                                 12               12
 
