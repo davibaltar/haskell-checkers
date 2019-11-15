@@ -4,6 +4,10 @@ Version of the game Checkers completely made in Haskell. The game deals with bas
 
 ## How to play?
 
+Play online [clicking here!](https://www.onlinegdb.com/HkA3fqoiH)
+
+or local:
+
 ```bash
 $ ghci checkers.hs
 ```
@@ -13,31 +17,8 @@ and
 *Main> main
 ```
 
-## Game interface
 
-```js
-        *** Checkers ***                    Player 1 (●)  |  Player 2 (○)
-                                                12               12
 
- Y
- ↑ ╔════════════════════════╗
- 8 ║▓▓▓ ○ ▓▓▓ ○ ▓▓▓ ○ ▓▓▓ ○ ║
- 7 ║ ○ ▓▓▓ ○ ▓▓▓ ○ ▓▓▓ ○ ▓▓▓║
- 6 ║▓▓▓ ○ ▓▓▓ ○ ▓▓▓ ○ ▓▓▓ ○ ║
- 5 ║   ▓▓▓   ▓▓▓   ▓▓▓   ▓▓▓║
- 4 ║▓▓▓   ▓▓▓   ▓▓▓   ▓▓▓   ║
- 3 ║ ● ▓▓▓ ● ▓▓▓ ● ▓▓▓ ● ▓▓▓║
- 2 ║▓▓▓ ● ▓▓▓ ● ▓▓▓ ● ▓▓▓ ● ║
- 1 ║ ● ▓▓▓ ● ▓▓▓ ● ▓▓▓ ● ▓▓▓║
-   ╚════════════════════════╝
-     1  2  3  4  5  6  7  8 → X
-
-Player 1: 
-
-Origin:
-X: 
-
- ```
 
  ## License
 

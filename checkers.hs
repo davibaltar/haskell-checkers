@@ -1,9 +1,9 @@
 {- 
-    Porject name: Checkers
+    Porject: Checkers
     Author: Davi D. Baltar
     Create: 2018/11/20
-    Update: 2019/11/13
-    Versao: 1.0.2
+    Update: 2019/11/15
+    Version: 1.0.3
 -} 
 
 import qualified System.Process as SP
@@ -28,7 +28,6 @@ substituirTabuleiro::Tabuleiro->Posicao->Posicao->Tabuleiro
 substituirTabuleiro (x:[]) old new = [substituirLinha x old new]
 substituirTabuleiro (x:xs) old new = (substituirLinha x old new):substituirTabuleiro xs old new
 
--- ○ ● ■ □
 formatarTabuleiro::Linha -> String
 formatarTabuleiro [] = "║"
 formatarTabuleiro ((w,x,y):xs) 
@@ -65,13 +64,9 @@ getNum = readLn
 
 getPosicao :: IO (Int, Int)
 getPosicao = do
-    putStr  "X: " 
     rx <- getLine
-    let x = read rx
-    putStr "Y: "
     ry <- getLine
-    let y = read ry
-    return (x, y)
+    return (read rx, read ry)
 
 removeZerosArray :: [Int] -> [Int]
 removeZerosArray lista = [c | c <-lista , c/=0]
@@ -80,14 +75,12 @@ oponente :: Int -> Int
 oponente 1 = 2
 oponente x = 1
 
-
 clearScreen :: IO ()
 clearScreen = do
   _ <- SP.system "clear"
   return ()
 
 default (Int)  -- literal desambiguation
-
 main :: IO ()
 main = do
     tabuleiro <- newIORef [ [(8,8,0),(9,9,9),(2,2,8),(9,9,9),(2,4,8),(9,9,9),(2,6,8),(9,9,9),(2,8,8)],
@@ -117,7 +110,6 @@ loop tabuleiro jogador pedrasJ1 pedrasJ2 = do
     putStrLn (imprimirTabuleiro tab)
     putStrLn "   ╚════════════════════════╝"
     putStrLn "     1  2  3  4  5  6  7  8 → X"
-    --putStrLn "     a  b  c  d  e  f  g  h → X"
 
     if (pedJ1 == 0) then do
         putStrLn "\n            THE END       " 
@@ -128,35 +120,22 @@ loop tabuleiro jogador pedrasJ1 pedrasJ2 = do
     else do
         jog <- readIORef jogador
         putStrLn $ "\nPlayer " ++ show jog ++ ": "
-    
-        putStrLn "\nOrigin:"
+        putStrLn "\nOrigin: X [ENTER] Y"
         (x, y) <- getPosicao
         let posOrigem = (jog,x,y)
-
-        putStrLn "\nDestiny:"
+        putStrLn "\nDestiny: X [ENTER] Y"
         (i, j) <- getPosicao
         let posDestino = (0,i,j)
-
-        --if ((removeZerosArray (procurarTabuleiro tab (jog+2 , x, y))) == [1] )
         
-        if ((removeZerosArray (procurarTabuleiro tab (oponente jog ,succ x, succ y))) == [1] ) && (succ x == pred i) && (succ y == pred j) && ((removeZerosArray (procurarTabuleiro tab posOrigem)) == (removeZerosArray (procurarTabuleiro tab posDestino))) then do
-            --putStrLn "Eliminando pedra para Cima->Direita "
+        if ((removeZerosArray (procurarTabuleiro tab (oponente jog ,succ x, succ y))) == [1] ) && (succ x == pred i) && (succ y == pred j) && ((removeZerosArray (procurarTabuleiro tab posOrigem)) == (removeZerosArray (procurarTabuleiro tab posDestino))) then do -- Eliminando pedra para Cima->Direita
             writeIORef tabuleiro (substituirTabuleiro tab (0,succ x,succ y) (0,0,0))
-
-        else if ((removeZerosArray (procurarTabuleiro tab (oponente jog, pred x, succ y))) == [1] ) && (pred x == succ i) && (succ y == pred j) && ((removeZerosArray (procurarTabuleiro tab posOrigem)) == (removeZerosArray (procurarTabuleiro tab posDestino))) then do
-            --putStrLn "Eliminando pedra para Cima->Esquerda "
+        else if ((removeZerosArray (procurarTabuleiro tab (oponente jog, pred x, succ y))) == [1] ) && (pred x == succ i) && (succ y == pred j) && ((removeZerosArray (procurarTabuleiro tab posOrigem)) == (removeZerosArray (procurarTabuleiro tab posDestino))) then do -- Eliminando pedra para Cima->Esquerda
             writeIORef tabuleiro (substituirTabuleiro tab (0,pred x,succ y) (0,0,0))
-
-        else if ((removeZerosArray (procurarTabuleiro tab (oponente jog, pred x, pred y))) == [1] ) && (pred x == succ i) && (pred y == succ j) && ((removeZerosArray (procurarTabuleiro tab posOrigem)) == (removeZerosArray (procurarTabuleiro tab posDestino))) then do
-            --putStrLn "Eliminando pedra para tras->esquerda"
+        else if ((removeZerosArray (procurarTabuleiro tab (oponente jog, pred x, pred y))) == [1] ) && (pred x == succ i) && (pred y == succ j) && ((removeZerosArray (procurarTabuleiro tab posOrigem)) == (removeZerosArray (procurarTabuleiro tab posDestino))) then do -- Eliminando pedra para tras->esquerda
             writeIORef tabuleiro (substituirTabuleiro tab (0,pred x,pred y) (0,0,0))
-
-        else if ((removeZerosArray (procurarTabuleiro tab (oponente jog, succ x, pred y))) == [1] ) && (succ x == pred i) && (pred y == succ j) && ((removeZerosArray (procurarTabuleiro tab posOrigem)) == (removeZerosArray (procurarTabuleiro tab posDestino))) then do
-            --putStrLn "Eliminando pedra para tras->direita"
+        else if ((removeZerosArray (procurarTabuleiro tab (oponente jog, succ x, pred y))) == [1] ) && (succ x == pred i) && (pred y == succ j) && ((removeZerosArray (procurarTabuleiro tab posOrigem)) == (removeZerosArray (procurarTabuleiro tab posDestino))) then do -- Eliminando pedra para tras->direita
             writeIORef tabuleiro (substituirTabuleiro tab (0,succ x,pred y) (0,0,0))
-
-        else if (((jog == 1) && ( ((succ x == i) && (succ y == j)) || ((pred x == i) && (succ y == j)))) || ((jog == 2) && ( ((succ x == i) && (pred y == j)) || ((pred x == i) && (pred y == j))))) && ((removeZerosArray (procurarTabuleiro tab posOrigem)) == (removeZerosArray (procurarTabuleiro tab posDestino))) then do
-            --putStrLn "Andar uma casa para baixo (esquerda ou direita)"
+        else if (((jog == 1) && ( ((succ x == i) && (succ y == j)) || ((pred x == i) && (succ y == j)))) || ((jog == 2) && ( ((succ x == i) && (pred y == j)) || ((pred x == i) && (pred y == j))))) && ((removeZerosArray (procurarTabuleiro tab posOrigem)) == (removeZerosArray (procurarTabuleiro tab posDestino))) then do -- Andar uma casa para baixo (esquerda ou direita)
             writeIORef tabuleiro (substituirTabuleiro tab posDestino posOrigem)
             tab <- readIORef tabuleiro
             writeIORef tabuleiro (substituirTabuleiro tab posOrigem (0,0,0))
@@ -185,5 +164,4 @@ loop tabuleiro jogador pedrasJ1 pedrasJ2 = do
             writeIORef pedrasJ1 (pedJ1-1)
         else do
             writeIORef pedrasJ2 (pedJ2-1)
-
         loop tabuleiro jogador pedrasJ1 pedrasJ2
