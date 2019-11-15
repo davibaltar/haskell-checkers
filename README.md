@@ -17,8 +17,9 @@ and
 *Main> main
 ```
 
+## Screenshot
 
-
+![](https://raw.githubusercontent.com/davibaltar/haskell-checkers/master/screenshot.png)
 
  ## License
 
