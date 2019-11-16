@@ -121,11 +121,11 @@ loop tabuleiro jogador pedrasJ1 pedrasJ2 = do
     putStrLn "     1  2  3  4  5  6  7  8 → X"
 
     if (pedJ1 == 0) then do
-        putStrLn "\n            THE END       " 
-        putStrLn "       PLAYER 2 (○) WON!!!\n" 
+        putStrLn "\n            THE END           " 
+        putStrLn "      WINNER: PLAYER 2 (○) !!!\n" 
     else if (pedJ2 == 0) then do
-        putStrLn "\n            THE END       " 
-        putStrLn "       PLAYER 1 (●) WON!!!\n" 
+        putStrLn "\n            THE END           " 
+        putStrLn "      WINNER: PLAYER 1 (●) !!!\n" 
     else do
         jog <- readIORef jogador
         putStrLn $ "\nPlayer " ++ show jog ++ ": "
