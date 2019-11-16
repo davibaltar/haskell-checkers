@@ -1,13 +1,15 @@
 {- 
     Porject: Checkers
-    Author: Davi D. Baltar
+    Author: Davi Baltar
     Create: 2018/11/20
-    Update: 2019/11/15
-    Version: 1.0.3
+    Update: 2019/11/16
+    Version: 1.0.4
 -} 
 
 import qualified System.Process as SP
+import System.Info as SI
 import Data.IORef
+import System.IO (hPutStrLn, hSetEncoding, stdout, utf8)
 
 type Jogador = Int
 type X = Int
@@ -35,7 +37,7 @@ formatarTabuleiro ((w,x,y):xs)
     |(w == 0) = "   "++formatarTabuleiro xs
     |(w == 1) = " ● "++formatarTabuleiro xs
     |(w == 2) = " ○ "++formatarTabuleiro xs
-    |(w == 9) = "▓▓▓"++formatarTabuleiro xs
+    |(w == 9) = "███"++formatarTabuleiro xs
     |otherwise = formatarTabuleiro xs
 
 imprimirTabuleiro::Tabuleiro->String
@@ -77,12 +79,19 @@ oponente x = 1
 
 clearScreen :: IO ()
 clearScreen = do
-  _ <- SP.system "clear"
-  return ()
+    --putStrLn SI.os
+    if (SI.os == "darwin" || SI.os == "linux") then do      -- unix
+        _ <- SP.system "clear"
+        return ()
+    else do                                                 -- win
+        _ <- SP.system "cls"
+        return ()
+    return ()
 
 default (Int)  -- literal desambiguation
 main :: IO ()
 main = do
+    hSetEncoding stdout utf8 -- This has to be the first action, otherwise you get the "invalid character" error
     tabuleiro <- newIORef [ [(8,8,0),(9,9,9),(2,2,8),(9,9,9),(2,4,8),(9,9,9),(2,6,8),(9,9,9),(2,8,8)],
                             [(8,7,0),(2,1,7),(9,9,9),(2,3,7),(9,9,9),(2,5,7),(9,9,9),(2,7,7),(9,9,9)],
                             [(8,6,0),(9,9,9),(2,2,6),(9,9,9),(2,4,6),(9,9,9),(2,6,6),(9,9,9),(2,8,6)],

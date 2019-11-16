@@ -4,7 +4,7 @@ Version of the game Checkers completely made in Haskell. The game deals with bas
 
 ## How to play?
 
-Play online [clicking here!](https://www.onlinegdb.com/HkA3fqoiH)
+Play online [clicking here!](https://onlinegdb.com/HyVW9iasr)
 
 or local:
 
