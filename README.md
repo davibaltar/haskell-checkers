@@ -11,8 +11,6 @@ or local:
 ```bash
 $ ghci checkers.hs
 ```
-and 
-
 ```bash
 *Main> main
 ```
