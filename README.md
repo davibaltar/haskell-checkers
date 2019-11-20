@@ -8,8 +8,17 @@ Play online [clicking here!](https://onlinegdb.com/HyVW9iasr)
 
 or local:
 
+**Windows:**
 ```bash
-$ ghci checkers.hs
+$ ghci checkers_win.hs
+```
+```bash
+*Main> main
+```
+
+**MAC OS X and Linux:**
+```bash
+$ ghci checkers_unix.hs
 ```
 ```bash
 *Main> main

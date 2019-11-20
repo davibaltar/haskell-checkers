@@ -79,13 +79,7 @@ oponente x = 1
 
 clearScreen :: IO ()
 clearScreen = do
-    --putStrLn SI.os
-    if (SI.os == "darwin" || SI.os == "linux") then do      -- unix
-        _ <- SP.system "clear"
-        return ()
-    else do                                                 -- win
-        _ <- SP.system "cls"
-        return ()
+    _ <- SP.system "clear"
     return ()
 
 default (Int)  -- literal desambiguation
