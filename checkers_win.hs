@@ -2,8 +2,8 @@
     Porject: Checkers
     Author: Davi Baltar
     Create: 2018/11/20
-    Update: 2019/11/16
-    Version: 1.0.4
+    Update: 2020/01/16
+    Version: 1.0.5
 -} 
 
 import qualified System.Process as SP
@@ -109,7 +109,7 @@ loop tabuleiro jogador pedrasJ1 pedrasJ2 = do
     pedJ2 <- readIORef pedrasJ2 
 
     putStrLn "        *** Checkers ***                    Player 1 (●)  |  Player 2 (○)"
-    putStrLn $ "                                                "++show pedJ1++"               "++ show pedJ2
+    putStrLn $ "                                                "++show pedJ2++"               "++ show pedJ1
     putStrLn " Y"
     putStrLn " ↑ ╔════════════════════════╗"
     putStrLn (imprimirTabuleiro tab)
@@ -118,10 +118,10 @@ loop tabuleiro jogador pedrasJ1 pedrasJ2 = do
 
     if (pedJ1 == 0) then do
         putStrLn "\n            THE END           " 
-        putStrLn "      WINNER: PLAYER 2 (○) !!!\n" 
+        putStrLn "      WINNER: PLAYER 1 (●) !!!\n" 
     else if (pedJ2 == 0) then do
         putStrLn "\n            THE END           " 
-        putStrLn "      WINNER: PLAYER 1 (●) !!!\n" 
+        putStrLn "      WINNER: PLAYER 2 (○) !!!\n" 
     else do
         jog <- readIORef jogador
         putStrLn $ "\nPlayer " ++ show jog ++ ": "
