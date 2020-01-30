@@ -4,10 +4,6 @@ Version of the game Checkers completely made in Haskell. The game deals with bas
 
 ## How to play?
 
-Play online [clicking here!](https://onlinegdb.com/HyVW9iasr)
-
-or local:
-
 **Windows:**
 ```bash
 $ ghci checkers_win.hs
